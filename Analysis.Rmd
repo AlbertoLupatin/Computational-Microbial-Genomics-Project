@@ -1,0 +1,29 @@
+---
+title: "Analysis"
+output: html_document
+date: "2024-04-02"
+---
+
+## Gene Presence Absence
+
+```{r}
+library(pheatmap)
+
+x <- read.table("/Users/albertolupatin/Desktop/Genomics/Project/Roary/roary_output/gene_presence_absence.Rtab")
+x <- as.matrix(x)
+
+rownames(x) <- x[, 1]
+x <- x[, -1]
+
+colnames(x) <- x[1, ]
+x <- x[-1, ]
+
+x <- matrix(as.numeric(x), ncol=30)
+x <- t(x)
+
+pheatmap::pheatmap(as.matrix(x), cluster_col = FALSE, clustering_method = "complete", 
+                   main = "Gene Presence Absence", color = c("white", "blue"),
+                   labels_row = c(1:30))
+```
+
+
